@@ -17,6 +17,7 @@ else
 		echo "no linux ahk"
 	else
 		./buildLite.cmd
+		./createDatabases.sh
 	fi
 fi
 
