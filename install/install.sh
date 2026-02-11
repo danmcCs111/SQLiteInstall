@@ -4,13 +4,20 @@ orgDir=`pwd`
 cd "$(dirname "$0")"
 cd ../
 
-./install/downloadLite.sh
-if [[ "$typeOs" == "Linux" ]]
+dir=`ls -d sqlite-src-*/ | sed -E 's/\/$//g'`
+
+if [[ -d "$dir" ]]
 then
-	#no op
-	echo "no linux ahk"
+	echo $dir exists
 else
-	./install/buildLite.cmd
+	./install/downloadLite.sh
+	if [[ "$typeOs" == "Linux" ]]
+	then
+		#no op
+		echo "no linux ahk"
+	else
+		./buildLite.cmd
+	fi
 fi
 
 cd $orgDir
