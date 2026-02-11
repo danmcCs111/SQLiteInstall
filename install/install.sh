@@ -11,14 +11,15 @@ then
 	echo $dir exists
 else
 	./install/downloadLite.sh
-	if [[ "$typeOs" == "Linux" ]]
-	then
-		#no op
-		echo "no linux ahk"
-	else
-		./buildLite.cmd
-		./createDatabases.sh
-	fi
+fi
+
+if [[ "$typeOs" == "Linux" ]]
+then
+	#no op
+	echo "no linux ahk"
+else
+	./buildLite.cmd
+	./createDatabases.sh
 fi
 
 cd $orgDir
