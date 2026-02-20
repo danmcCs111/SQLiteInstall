@@ -15,7 +15,8 @@ fi
 
 if [[ "$typeOs" == "Linux" ]]
 then
-	#no op
+	./buildLite.sh
+	./createDatabases.sh
 	echo "no linux ahk"
 else
 	./buildLite.cmd
