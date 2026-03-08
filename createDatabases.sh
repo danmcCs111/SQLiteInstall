@@ -1,7 +1,8 @@
 #!/bin/bash
 
 typeOs=`uname`
-dbs=`ls create*Database.sh`
+dbs=`ls *Database.sh`
+
 if [[ "$typeOs" == "Linux" ]]
 then
 	sqlite="./sqlite-src-3510200/sqlite3"
