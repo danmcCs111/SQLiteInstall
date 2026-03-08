@@ -1,8 +1,13 @@
 #!/bin/bash
-
 sqlite="$1"
 
-createTable=`cat ../DatabaseAdapterService/sql_statements/create/create-tables/create_table-youtube\ -\ sqlite.sql`
-createTable2=`cat ../DatabaseAdapterService/sql_statements/create/create-tables/create_table-VideoLink\ -\ sqlite.sql`
+prefix="../DatabaseAdapterService/sql_statements/create/create-tables/create_table-VideoDatabase-sqlite/"
+createTables=(`ls $prefix`)
 
-echo "$createTable;" "$createTable2" | $sqlite videodatabase.db
+echo ${createTables[@]}
+var=""
+for ct in ${createTables[@]}
+do
+	var=`cat "$prefix$ct"`
+	echo "$var" | $sqlite videodatabase.db
+done
