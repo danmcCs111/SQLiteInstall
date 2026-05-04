@@ -1,13 +1,20 @@
 #!/bin/bash
 sqlite="$1"
 
-prefix="../DatabaseAdapterService/sql_statements/alter/alter-tables/alter_table-VideoDatabase-sqlite/"
+prefix="../DatabaseAdapterService/sql_statements/alter/alter-tables/*/"
 createTables=(`ls $prefix`)
 
-echo ${createTables[@]}
 var=""
-for ct in ${createTables[@]}
+count=${#createTables[@]}
+countInc=$(( $count / 2 ))
+
+echo $count "${createTables[@]}"
+count=0
+
+for i in {0..$(( $countInc ))}
 do
-	var=`cat "$prefix$ct"`
+	dir=`echo ${createTables[$(($count))]} | sed 's/://g'`
+	var=`cat "$dir${createTables[$(( $count + 1 ))]}"`
 	echo "$var" | $sqlite videodatabase.db
+	count=$(( $count + 2 ))
 done
