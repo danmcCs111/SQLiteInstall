@@ -1,20 +1,21 @@
 #!/bin/bash
 sqlite="$1"
 
-prefix="../DatabaseAdapterService/sql_statements/alter/alter-tables/*/"
-createTables=(`ls $prefix`)
+dirs=`ls -l ../DatabaseAdapterService/sql_statements/alter/alter-tables/*/ | egrep "^\.\." | sed 's/://g'`
 
-var=""
-count=${#createTables[@]}
-countInc=$(( $count / 2 ))
+echo ${dirs[@]}
+echo 
 
-echo $count "${createTables[@]}"
-count=0
-
-for i in {0..$(( $countInc ))}
+for d in ${dirs[@]}
 do
-	dir=`echo ${createTables[$(($count))]} | sed 's/://g'`
-	var=`cat "$dir${createTables[$(( $count + 1 ))]}"`
-	echo "$var" | $sqlite videodatabase.db
-	count=$(( $count + 2 ))
+	echo $d
+	files=`ls $d`
+	for f in ${files[@]}
+	do
+		echo $f
+		var=`cat $d$f`
+		echo $var
+
+		echo "$var" | $sqlite videodatabase.db
+	done
 done
