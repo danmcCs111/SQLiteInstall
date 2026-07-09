@@ -1,6 +1,6 @@
 #!/bin/bash
-sqlite="$1"
+source ./sqliteEnv.sh
 
 prefix="../DatabaseAdapterService/sql_statements/alter/alter-tables/*-sqlite/"
 
-./database-manage.sh $sqlite "$prefix"
+./database-manage.sh "$prefix"

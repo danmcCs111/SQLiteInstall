@@ -1,7 +1,6 @@
 #!/bin/bash
-
-sqlite="$1"
-prefix="$2"
+source ./sqliteEnv.sh
+prefix="$1"
 
 echo $prefix
 createTables=(`ls -l $prefix | grep :$`)

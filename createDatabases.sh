@@ -1,14 +1,7 @@
 #!/bin/bash
-typeOs=`uname`
-if [[ "$typeOs" == "Linux" ]]
-then
-	sqlite="./sqlite-src-3510200/sqlite3"
-else
-	sqlite="./sqlite-src-3510200/sqlite3.exe" 
-fi
-
+source ./sqliteEnv.sh
 prefix="../DatabaseAdapterService/sql_statements/create/create-tables/*-sqlite/"
 
-./database-manage.sh $sqlite "$prefix"
+./database-manage.sh "$prefix"
 
-./alterDatabases.sh $sqlite
+./alterDatabases.sh 
