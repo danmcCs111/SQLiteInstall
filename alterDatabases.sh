@@ -1,7 +1,7 @@
 #!/bin/bash
 sqlite="$1"
 
-prefix="../DatabaseAdapterService/sql_statements/create/create-tables/*-sqlite/"
+prefix="../DatabaseAdapterService/sql_statements/alter/alter-tables/*-sqlite/"
 createTables=(`ls -l $prefix | grep :$`)
 
 var=""
@@ -34,4 +34,3 @@ do
 	done
 done
 
-./alterDatabases.sh $sqlite
