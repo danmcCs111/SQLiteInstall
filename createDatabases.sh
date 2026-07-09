@@ -1,17 +1,28 @@
 #!/bin/bash
+sqlite="$1"
 
-typeOs=`uname`
-dbs=`ls *Database.sh`
+prefix="../DatabaseAdapterService/sql_statements/create/create-tables/*-sqlite/"
+createTables=(`ls $prefix`)
 
-if [[ "$typeOs" == "Linux" ]]
-then
-	sqlite="./sqlite-src-3510200/sqlite3"
-else
-	sqlite="./sqlite-src-3510200/sqlite3.exe" 
-fi
+var=""
+count=${#createTables[@]}
+countInc=$(( $count / 2 ))
 
-for d in ${dbs[@]}
+echo $count "${createTables[@]}"
+count=0
+
+for i in {0..$(( $countInc ))}
 do
-	echo $d
-	./$d $sqlite
+	dir=`echo ${createTables[$(($count))]} | sed 's/://g'`
+	var=`cat "$dir${createTables[$(( $count + 1 ))]}"`
+	database=`echo $dir | egrep -o "[a-zA-Z\-]*/$" | sed 's/table//g' | sed 's/sqlite//g' | egrep -o "[a-zA-Z]+"`
+	database=`echo ${database,,}`.db
+
+	echo dir: "$dir" 
+	echo database: "$database" 
+	echo table: "$var" 
+
+	echo "$var" | $sqlite $database
+	count=$(( $count + 2 ))
 done
+
