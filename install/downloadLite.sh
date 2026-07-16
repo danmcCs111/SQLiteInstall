@@ -14,6 +14,3 @@ else
 	unzip sqlite-tools-win-x64-3510200.zip -d sqlite-tools-win-x64-3510200
 fi
 cd $orgDir
-
-
-
