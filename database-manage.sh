@@ -3,14 +3,15 @@ source ./sqliteEnv.sh
 prefix="$1"
 
 echo $prefix
-createTables=(`ls -l $prefix | grep :$`)
-
-var=""
+createTables=(`du -sh $prefix | awk '{print $NF}'`)
 count=${#createTables[@]}
+var=""
+
+echo $count
 
 echo ${createTables[@]}
 
-for i in $(seq 0 $(( $count-1 )) )
+for i in $(seq 0 $(( $count -1 )) )
 do
 	dir=`echo ${createTables[$(($i))]} | sed 's/://g'`
 	database=`echo $dir | egrep -o "[a-zA-Z\-]*/$" | sed 's/table-//g' | sed 's/sqlite//g' | egrep -o "[a-zA-Z]*"`
